@@ -8,6 +8,7 @@ import AdventurePage from "../pages/AdventureGames";
 import PuzzlePage from "../pages/PuzzleGames";
 import TowerDefensePage from "../pages/TowerDefensePage";
 import IdlePage from "../pages/IdlePage";
+import LoginPage from "../pages/LoginPage";
 
 export const test = base.extend<{
   homePage: HomePage;
@@ -17,8 +18,9 @@ export const test = base.extend<{
   actionPage: ActionPage;
   adventurePage: AdventurePage;
   puzzlePage: PuzzlePage;
-  towerDefesePage: TowerDefensePage;
+  towerDefensePage: TowerDefensePage;
   idlePage: IdlePage;
+  loginPage: LoginPage;
 }>({
   homePage: async ({ page }, use) => {
     await use(new HomePage(page));
@@ -41,10 +43,13 @@ export const test = base.extend<{
   puzzlePage: async ({ page }, use) => {
     await use(new PuzzlePage(page));
   },
-  towerDefesePage: async ({ page }, use) => {
+  towerDefensePage: async ({ page }, use) => {
     await use(new TowerDefensePage(page));
   },
   idlePage: async ({ page }, use) => {
     await use(new IdlePage(page));
+  },
+  loginPage: async ({ page }, use) => {
+    await use(new LoginPage(page));
   },
 });
