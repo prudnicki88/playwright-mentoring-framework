@@ -1,15 +1,15 @@
 import { Page } from "@playwright/test";
 import BasePage from "./BasePage";
 
-class TowerDefensePage extends BasePage {
+class FragrancePage extends BasePage {
   readonly path: string;
   readonly breadcrumbText: string;
 
   constructor(page: Page) {
     super(page);
-    this.path = "/category/tower-defense-games";
-    this.breadcrumbText = "Tower Defense Games";
+    this.path = "index.php?rt=product/category&path=49";
+    this.breadcrumbText = "	    	Fragrance	    ";
   }
 }
 
-export default TowerDefensePage;
+export default FragrancePage;

@@ -1,55 +1,45 @@
 import { test as base } from "@playwright/test";
 import HomePage from "../pages/HomePage";
-import MMOPage from "../pages/MMOPage";
-import StrategyPage from "../pages/StrategyPage";
-import ShootingPage from "../pages/ShootingPage";
-import ActionPage from "../pages/ActionPage";
-import AdventurePage from "../pages/AdventureGames";
-import PuzzlePage from "../pages/PuzzleGames";
-import TowerDefensePage from "../pages/TowerDefensePage";
-import IdlePage from "../pages/IdlePage";
-import LoginPage from "../pages/LoginPage";
+import ApparelPage from "../pages/ApparelPage";
+import BooksPage from "../pages/BooksPage";
+import FragrancePage from "../pages/FragrancePage";
+import HairCarePage from "../pages/HairCarePage";
+import MakeupPage from "../pages/MakeupPage";
+import MenPage from "../pages/MenPage";
+import SkincarePage from "../pages/SkincarePage";
 
 export const test = base.extend<{
   homePage: HomePage;
-  mmoPage: MMOPage;
-  strategyPage: StrategyPage;
-  shootingPage: ShootingPage;
-  actionPage: ActionPage;
-  adventurePage: AdventurePage;
-  puzzlePage: PuzzlePage;
-  towerDefensePage: TowerDefensePage;
-  idlePage: IdlePage;
-  loginPage: LoginPage;
+  apparelPage: ApparelPage;
+  booksPage: BooksPage;
+  fragrancePage: FragrancePage;
+  hairCarePage: HairCarePage;
+  makeupPage: MakeupPage;
+  menPage: MenPage;
+  skincarePage: SkincarePage;
 }>({
   homePage: async ({ page }, use) => {
     await use(new HomePage(page));
   },
-  mmoPage: async ({ page }, use) => {
-    await use(new MMOPage(page));
+  apparelPage: async ({ page }, use) => {
+    await use(new ApparelPage(page));
   },
-  strategyPage: async ({ page }, use) => {
-    await use(new StrategyPage(page));
+  booksPage: async ({ page }, use) => {
+    await use(new BooksPage(page));
   },
-  shootingPage: async ({ page }, use) => {
-    await use(new ShootingPage(page));
+  fragrancePage: async ({ page }, use) => {
+    await use(new FragrancePage(page));
   },
-  actionPage: async ({ page }, use) => {
-    await use(new ActionPage(page));
+  hairCarePage: async ({ page }, use) => {
+    await use(new HairCarePage(page));
   },
-  adventurePage: async ({ page }, use) => {
-    await use(new AdventurePage(page));
+  makeupPage: async ({ page }, use) => {
+    await use(new MakeupPage(page));
   },
-  puzzlePage: async ({ page }, use) => {
-    await use(new PuzzlePage(page));
+  menPage: async ({ page }, use) => {
+    await use(new MenPage(page));
   },
-  towerDefensePage: async ({ page }, use) => {
-    await use(new TowerDefensePage(page));
-  },
-  idlePage: async ({ page }, use) => {
-    await use(new IdlePage(page));
-  },
-  loginPage: async ({ page }, use) => {
-    await use(new LoginPage(page));
+  skincarePage: async ({ page }, use) => {
+    await use(new SkincarePage(page));
   },
 });

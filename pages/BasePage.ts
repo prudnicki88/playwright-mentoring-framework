@@ -14,7 +14,7 @@ abstract class BasePage {
     this.page = page;
     this.nav = new NavComponent(page);
     this.header = new HeaderComponent(page);
-    this.breadcrumb = this.page.locator(".ex-breadcrumb");
+    this.breadcrumb = this.page.locator(".breadcrumb");
   }
 
   async goTo() {

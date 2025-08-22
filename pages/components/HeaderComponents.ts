@@ -5,7 +5,7 @@ class HeaderComponent {
 
   constructor(page: Page) {
     this.page = page;
-    this.container = page.locator("div.top-banner");
+    this.container = page.locator("div.headerstrip");
   }
 }
 

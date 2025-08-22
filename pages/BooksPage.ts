@@ -1,15 +1,15 @@
 import { Page } from "@playwright/test";
 import BasePage from "./BasePage";
 
-class StrategyPage extends BasePage {
+class BooksPage extends BasePage {
   readonly path: string;
   readonly breadcrumbText: string;
 
   constructor(page: Page) {
     super(page);
-    this.path = "/category/strategy-games";
-    this.breadcrumbText = "Strategy Games";
+    this.path = "/index.php?rt=product/category&path=65";
+    this.breadcrumbText = "	    	Books	    ";
   }
 }
 
-export default StrategyPage;
+export default BooksPage;
