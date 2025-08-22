@@ -7,7 +7,7 @@ class NavComponent {
 
   constructor(page: Page) {
     this.page = page;
-    this.navLink = (linkText: LinkText) => page.getByRole("link", { name: linkText });
+    this.navLink = (linkText: LinkText) => page.locator(".subnav > ul > li > a", { hasText: linkText });
   }
 
   async navigateTo(linkText: LinkText) {

@@ -12,6 +12,9 @@ test.describe("basic functionality", () => {
 });
 
 test.describe("navigation tests", () => {
+    test.beforeEach("navigate to homepage", async ({ homePage }) => {
+    await homePage.goTo();
+  });
   test.only("navigation", async ({
     homePage,
     apparelPage,
