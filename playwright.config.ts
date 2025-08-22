@@ -35,8 +35,14 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
+      name: "authorization",
+      testMatch: /.*\.setup\.ts/,
+      use: { ...devices["Desktop Chrome"], storageState: undefined },
+    },
+    {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      use: { ...devices["Desktop Chrome"], storageState: "playwright/.auth/user.json" },
+      dependencies: ["authorization"],
     },
 
     // {

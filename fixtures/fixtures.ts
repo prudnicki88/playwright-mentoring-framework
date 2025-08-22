@@ -7,6 +7,7 @@ import HairCarePage from "../pages/HairCarePage";
 import MakeupPage from "../pages/MakeupPage";
 import MenPage from "../pages/MenPage";
 import SkincarePage from "../pages/SkincarePage";
+import LoginPage from "../pages/LoginPage";
 
 export const test = base.extend<{
   homePage: HomePage;
@@ -17,6 +18,7 @@ export const test = base.extend<{
   makeupPage: MakeupPage;
   menPage: MenPage;
   skincarePage: SkincarePage;
+  loginPage: LoginPage;
 }>({
   homePage: async ({ page }, use) => {
     await use(new HomePage(page));
@@ -41,5 +43,8 @@ export const test = base.extend<{
   },
   skincarePage: async ({ page }, use) => {
     await use(new SkincarePage(page));
+  },
+  loginPage: async ({ page }, use) => {
+    await use(new LoginPage(page));
   },
 });
