@@ -1,19 +1,10 @@
 import { test } from "../fixtures/fixtures";
 
-test.describe("basic functionality", () => {
-  test.beforeEach("navigate to homepage", async ({ homePage }) => {
-    await homePage.goTo();
-  });
-
-  test("has title", async ({ homePage }) => {
-    await homePage.goTo();
-  });
+test.beforeEach("navigate to homepage", async ({ homePage }) => {
+  await homePage.goTo();
 });
 
 test.describe("navigation tests", () => {
-  test.beforeEach("navigate to homepage", async ({ homePage }) => {
-    await homePage.goTo();
-  });
   test("navigation - apparel", async ({ homePage, apparelPage }) => {
     await homePage.nav.navigateTo("Apparel & accessories");
     await apparelPage.verifyBreadcrumb();
@@ -39,32 +30,58 @@ test.describe("navigation tests", () => {
     await makeupPage.verifyBreadcrumb();
   });
 
-  test("navigation all", async ({
-    homePage,
-    apparelPage,
-    makeupPage,
-    skincarePage,
-    fragrancePage,
-    menPage,
-    hairCarePage,
-    booksPage,
-    page,
-  }) => {
-    await homePage.nav.navigateTo("Apparel & accessories");
-    await apparelPage.verifyBreadcrumb();
-    await homePage.nav.navigateTo("Makeup");
-    await makeupPage.verifyBreadcrumb();
+  test("navigation - skincare", async ({ homePage, skincarePage }) => {
     await homePage.nav.navigateTo("Skincare");
     await skincarePage.verifyBreadcrumb();
+    await homePage.nav.navigateTo("Skincare", "Eyes");
+    await skincarePage.verifyBreadcrumb();
+    await homePage.nav.navigateTo("Skincare", "Face");
+    await skincarePage.verifyBreadcrumb();
+    await homePage.nav.navigateTo("Skincare", "Gift Ideas & Sets");
+    await skincarePage.verifyBreadcrumb();
+    await homePage.nav.navigateTo("Skincare", "Hands & Nails");
+    await skincarePage.verifyBreadcrumb();
+    await homePage.nav.navigateTo("Skincare", "Sun");
+    await skincarePage.verifyBreadcrumb();
+  });
+
+  test("navigation - fragrance", async ({ homePage, fragrancePage }) => {
     await homePage.nav.navigateTo("Fragrance");
     await fragrancePage.verifyBreadcrumb();
+    await homePage.nav.navigateTo("Fragrance", "Men");
+    await fragrancePage.verifyBreadcrumb();
+    await homePage.nav.navigateTo("Fragrance", "Women");
+    await fragrancePage.verifyBreadcrumb();
+  });
+
+  test("navigation - men", async ({ homePage, menPage }) => {
     await homePage.nav.navigateTo("Men");
     await menPage.verifyBreadcrumb();
+    await homePage.nav.navigateTo("Men", "Body & Shower");
+    await menPage.verifyBreadcrumb();
+    await homePage.nav.navigateTo("Men", "Fragrance Sets");
+    await menPage.verifyBreadcrumb();
+    await homePage.nav.navigateTo("Men", "Pre-Shave & Shaving");
+    await menPage.verifyBreadcrumb();
+    await homePage.nav.navigateTo("Men", "Skincare");
+    await menPage.verifyBreadcrumb();
+  });
+
+  test("navigation - hair care", async ({ homePage, hairCarePage }) => {
     await homePage.nav.navigateTo("Hair Care");
     await hairCarePage.verifyBreadcrumb();
+    await homePage.nav.navigateTo("Hair Care", "Conditioner");
+    await hairCarePage.verifyBreadcrumb("Conditioner");
+    await homePage.nav.navigateTo("Hair Care", "Shampoo");
+    await hairCarePage.verifyBreadcrumb("Shampoo");
+  });
+
+  test("navigation - books", async ({ homePage, booksPage }) => {
     await homePage.nav.navigateTo("Books");
     await booksPage.verifyBreadcrumb();
-    await homePage.nav.navigateTo("Apparel & accessories", "Shoes");
-    await apparelPage.verifyBreadcrumb();
+    await homePage.nav.navigateTo("Books", "Audio CD");
+    await booksPage.verifyBreadcrumb("Audio CD");
+    await homePage.nav.navigateTo("Books", "Paperback");
+    await booksPage.verifyBreadcrumb("Paperback");
   });
 });

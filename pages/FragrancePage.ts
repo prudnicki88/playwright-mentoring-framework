@@ -8,7 +8,7 @@ class FragrancePage extends BasePage {
   constructor(page: Page) {
     super(page);
     this.path = "index.php?rt=product/category&path=49";
-    this.breadcrumbText = "	    	Fragrance	    ";
+    this.breadcrumbText = "Fragrance";
   }
 }
 

@@ -8,7 +8,7 @@ class ApparelPage extends BasePage {
   constructor(page: Page) {
     super(page);
     this.path = "/index.php?rt=product/category&path=68";
-    this.breadcrumbText = "	    	Apparel & accessories	    ";
+    this.breadcrumbText = "Apparel & accessories";
   }
 }
 

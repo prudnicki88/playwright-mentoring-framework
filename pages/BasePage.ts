@@ -22,8 +22,8 @@ abstract class BasePage {
     await expect(this.page).toHaveURL(this.path);
   }
 
-  async verifyBreadcrumb() {
-    await expect(this.breadcrumb).toContainText(this.breadcrumbText);
+  async verifyBreadcrumb(breadcrumbText = this.breadcrumbText) {
+    await expect(this.breadcrumb).toContainText(breadcrumbText);
   }
 }
 
