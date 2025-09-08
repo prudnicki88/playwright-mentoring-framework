@@ -96,7 +96,7 @@ test("navigation tests", async ({
   });
 });
 
-test.only("product card tests", async ({ homePage }) => {
+test("product card tests", async ({ homePage }) => {
   await homePage.getProductCard("Skinsheen Bronzer Stick", "featured").thumbnail().click();
   
 });
