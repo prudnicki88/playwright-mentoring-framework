@@ -7,6 +7,7 @@ class ProductCardComponent {
   readonly addToCartButton: () => Locator;
   readonly price: () => Promise<string | null>;
   readonly thumbnail: () => Locator;
+  readonly topLink: () => Locator;
 
   constructor(page: Page, productName: string, sectionId: string | undefined = undefined) {
     this.page = page;
@@ -20,8 +21,14 @@ class ProductCardComponent {
             .locator("xpath=../../..")
         : page.locator("a.prdocutname", { hasText: productName }).locator("xpath=../../..");
     this.addToCartButton = () => this.container(this.productName).locator("i.fa-cart-plus");
-    this.price = () => this.container(this.productName, this.sectionId).locator("div.oneprice").textContent();
-    this.thumbnail = () => this.container(this.productName, this.sectionId).locator("div.thumbnail > a");
+    this.price = () =>
+      this.container(this.productName, this.sectionId).locator("div.oneprice").textContent();
+    this.thumbnail = () =>
+      this.container(this.productName, this.sectionId).locator("div.thumbnail > a");
+    this.topLink = () =>
+      this.sectionId
+        ? page.locator(`section#${sectionId}`).locator("a.prdocutname", { hasText: productName })
+        : page.locator("a.prdocutname", { hasText: productName });
   }
 }
 

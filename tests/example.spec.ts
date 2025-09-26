@@ -1,21 +1,12 @@
 import { test } from "../fixtures/fixtures";
-import ProductCardComponent from "../pages/components/ProductCard";
+import ProductPage from "../pages/ProductPage";
 
 test.beforeEach("navigate to homepage", async ({ homePage }) => {
   await homePage.goTo();
 });
 
-test("navigation tests", async ({
-  homePage,
-  apparelPage,
-  makeupPage,
-  skincarePage,
-  fragrancePage,
-  hairCarePage,
-  menPage,
-  booksPage,
-}) => {
-  await test.step("navigation - apparel", async () => {
+test.describe("navigation tests", () => {
+  test("navigation - apparel", async ({ homePage, apparelPage }) => {
     await homePage.nav.navigateTo("Apparel & accessories");
     await apparelPage.verifyBreadcrumb();
     await homePage.nav.navigateTo("Apparel & accessories", "Shoes");
@@ -23,7 +14,8 @@ test("navigation tests", async ({
     await homePage.nav.navigateTo("Apparel & accessories", "T-shirts");
     await apparelPage.verifyBreadcrumb("T-shirts");
   });
-  await test.step("navigation - makeup", async () => {
+
+  test("navigation - makeup", async ({ homePage, makeupPage }) => {
     await homePage.nav.navigateTo("Makeup");
     await makeupPage.verifyBreadcrumb();
     await homePage.nav.navigateTo("Makeup", "Cheeks");
@@ -40,7 +32,7 @@ test("navigation tests", async ({
     await makeupPage.verifyBreadcrumb("Value Sets");
   });
 
-  await test.step("navigation - skincare", async () => {
+  test("navigation - skincare", async ({ homePage, skincarePage }) => {
     await homePage.nav.navigateTo("Skincare");
     await skincarePage.verifyBreadcrumb();
     await homePage.nav.navigateTo("Skincare", "Eyes");
@@ -55,7 +47,7 @@ test("navigation tests", async ({
     await skincarePage.verifyBreadcrumb("Sun");
   });
 
-  await test.step("navigation - fragrance", async () => {
+  test("navigation - fragrance", async ({ homePage, fragrancePage }) => {
     await homePage.nav.navigateTo("Fragrance");
     await fragrancePage.verifyBreadcrumb();
     await homePage.nav.navigateTo("Fragrance", "Men");
@@ -64,7 +56,7 @@ test("navigation tests", async ({
     await fragrancePage.verifyBreadcrumb("Women");
   });
 
-  await test.step("navigation - men", async () => {
+  test("navigation - men", async ({ homePage, menPage }) => {
     await homePage.nav.navigateTo("Men");
     await menPage.verifyBreadcrumb();
     await homePage.nav.navigateTo("Men", "Body & Shower");
@@ -77,7 +69,7 @@ test("navigation tests", async ({
     await menPage.verifyBreadcrumb("Skincare");
   });
 
-  await test.step("navigation - hair care", async () => {
+  test("navigation - hair care", async ({ homePage, hairCarePage }) => {
     await homePage.nav.navigateTo("Hair Care");
     await hairCarePage.verifyBreadcrumb();
     await homePage.nav.navigateTo("Hair Care", "Conditioner");
@@ -86,7 +78,7 @@ test("navigation tests", async ({
     await hairCarePage.verifyBreadcrumb("Shampoo");
   });
 
-  await test.step("navigation - books", async () => {
+  test("navigation - books", async ({ homePage, booksPage }) => {
     await homePage.nav.navigateTo("Books");
     await booksPage.verifyBreadcrumb();
     await homePage.nav.navigateTo("Books", "Audio CD");
@@ -96,7 +88,39 @@ test("navigation tests", async ({
   });
 });
 
-test("product card tests", async ({ homePage }) => {
-  await homePage.getProductCard("Skinsheen Bronzer Stick", "featured").thumbnail().click();
-  
+test.describe("product card tests", async () => {
+  test("click thumbnail", async ({ homePage, productPage }) => {
+    await homePage.getProductCard("Skinsheen Bronzer Stick", "featured").thumbnail().click();
+    const product = productPage("Skinsheen Bronzer Stick");
+    await product.verifyProductHeader();
+  });
+
+  test("click top link text", async ({ homePage, productPage }) => {
+    await homePage.goTo();
+    await homePage
+      .getProductCard("Absolute Anti-Age Spot Replenishing Unifying TreatmentSPF 15", "latest")
+      .topLink()
+      .click();
+    const product = productPage("Absolute Anti-Age Spot Replenishing Unifying TreatmentSPF 15");
+    await product.verifyProductHeader();
+  });
+});
+
+test.describe("product page tests", async () => {
+  test("check product details", async ({ homePage, productPage }) => {
+    await homePage.getProductCard("Skinsheen Bronzer Stick", "featured").thumbnail().click();
+    const bronzer = productPage("Skinsheen Bronzer Stick");
+    await bronzer.verifyProductHeader();
+    await bronzer.verifyPrice("$29.50");
+    await bronzer.setQuantity("2");
+    await bronzer.verifyTotalPrice("$59.00");
+  });
+  test("add product to cart", async ({ homePage, productPage, cartPage }) => {
+    await homePage.getProductCard("Skinsheen Bronzer Stick", "featured").thumbnail().click();
+    const bronzer = productPage("Skinsheen Bronzer Stick");
+    await bronzer.verifyProductHeader();
+    const price = await bronzer.extractPrice();
+    await bronzer.addToCart();
+    await cartPage.verifyBreadcrumb();
+  });
 });

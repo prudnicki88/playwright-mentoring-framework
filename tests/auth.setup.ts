@@ -1,4 +1,3 @@
-import { expect } from "@playwright/test";
 import { test } from "../fixtures/fixtures";
 
 test("login and save local storage for further authentication", async ({ loginPage, page }) => {

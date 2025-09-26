@@ -1,5 +1,13 @@
 import { Page, Locator, expect } from "@playwright/test";
-type LinkText = "Home" | "Apparel & accessories" | "Makeup" | "Skincare" | "Fragrance" | "Men" | "Hair Care" | "Books";
+type LinkText =
+  | "Home"
+  | "Apparel & accessories"
+  | "Makeup"
+  | "Skincare"
+  | "Fragrance"
+  | "Men"
+  | "Hair Care"
+  | "Books";
 type SubLinkText =
   | "Shoes"
   | "T-shirts"
@@ -30,11 +38,14 @@ class NavComponent {
 
   constructor(page: Page) {
     this.page = page;
-    this.navLink = (linkText: LinkText) => page.locator(".subnav > ul > li > a", { hasText: linkText });
+    this.navLink = (linkText: LinkText) =>
+      page.locator(".subnav > ul > li > a", { hasText: linkText });
     this.subNavLink = (linkText: LinkText, subLinkText: string) =>
       this.navLink(linkText)
         .locator("xpath=ancestor::li")
-        .locator("div.subcategories > ul > li > a", { hasText: new RegExp(`^\\s*${subLinkText}\\s*$`) });
+        .locator("div.subcategories > ul > li > a", {
+          hasText: new RegExp(`^\\s*${subLinkText}\\s*$`),
+        });
   }
 
   async navigateTo(linkText: LinkText, subLinkText?: SubLinkText) {
@@ -45,7 +56,9 @@ class NavComponent {
     } else {
       await this.navLink(linkText).click();
       if (linkText === "Home") {
-        await expect(this.page).toHaveTitle(new RegExp("A place to practice your automation skills!"));
+        await expect(this.page).toHaveTitle(
+          new RegExp("A place to practice your automation skills!")
+        );
       } else {
         await expect(this.page).toHaveTitle(new RegExp(`^${linkText}.*`));
       }

@@ -8,6 +8,8 @@ import MakeupPage from "../pages/MakeupPage";
 import MenPage from "../pages/MenPage";
 import SkincarePage from "../pages/SkincarePage";
 import LoginPage from "../pages/LoginPage";
+import ProductPage from "../pages/ProductPage";
+import CartPage from "../pages/CartPage";
 
 export const test = base.extend<{
   homePage: HomePage;
@@ -19,6 +21,8 @@ export const test = base.extend<{
   menPage: MenPage;
   skincarePage: SkincarePage;
   loginPage: LoginPage;
+  productPage: (productName: string) => ProductPage;
+  cartPage: CartPage;
 }>({
   homePage: async ({ page }, use) => {
     await use(new HomePage(page));
@@ -46,5 +50,11 @@ export const test = base.extend<{
   },
   loginPage: async ({ page }, use) => {
     await use(new LoginPage(page));
+  },
+  productPage: async ({ page }, use) => {
+    await use((productName: string) => new ProductPage(page, productName));
+  },
+  cartPage: async ({ page }, use) => {
+    await use(new CartPage(page));
   },
 });
