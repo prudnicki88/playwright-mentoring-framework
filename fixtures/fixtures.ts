@@ -1,3 +1,4 @@
+import { Browser, BrowserContext, Page } from "@playwright/test";
 import { test as base } from "@playwright/test";
 import HomePage from "../pages/HomePage";
 import ApparelPage from "../pages/ApparelPage";
@@ -10,6 +11,8 @@ import SkincarePage from "../pages/SkincarePage";
 import LoginPage from "../pages/LoginPage";
 import ProductPage from "../pages/ProductPage";
 import CartPage from "../pages/CartPage";
+import ConfirmPage from "../pages/ConfirmPage";
+import SuccessPage from "../pages/SuccessPage";
 
 export const test = base.extend<{
   homePage: HomePage;
@@ -23,6 +26,8 @@ export const test = base.extend<{
   loginPage: LoginPage;
   productPage: (productName: string) => ProductPage;
   cartPage: CartPage;
+  confirmPage: ConfirmPage;
+  successPage: SuccessPage;
 }>({
   homePage: async ({ page }, use) => {
     await use(new HomePage(page));
@@ -57,4 +62,32 @@ export const test = base.extend<{
   cartPage: async ({ page }, use) => {
     await use(new CartPage(page));
   },
+  confirmPage: async ({ page }, use) => {
+    await use(new ConfirmPage(page));
+  },
+  successPage: async ({ page }, use) => {
+    await use(new SuccessPage(page));
+  },
 });
+
+export type Pages = {
+  context: BrowserContext;
+  page: Page;
+  homePage: HomePage;
+  booksPage: BooksPage;
+  productPage1: ProductPage;
+  apparelPage: ApparelPage;
+};
+
+export const sharedContextPageFactory = async (browser: Browser): Promise<Pages> => {
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  return {
+    context,
+    page,
+    homePage: new HomePage(page),
+    booksPage: new BooksPage(page),
+    productPage1: new ProductPage(page, "Skinsheen Bronzer Stick"),
+    apparelPage: new ApparelPage(page),
+  };
+};
