@@ -164,7 +164,7 @@ test("checkout", async ({ homePage, productPage, cartPage, confirmPage, successP
   await successPage.verifyOrderProcessedText();
 });
 
-test.only("random products", async ({ homePage, cartPage, confirmPage, successPage }) => {
+test("random products", async ({ homePage, cartPage, confirmPage, successPage }) => {
   await homePage.goTo();
   const products = [
     "Skinsheen Bronzer Stick",
